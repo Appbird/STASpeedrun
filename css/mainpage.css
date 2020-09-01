@@ -1,0 +1,10 @@
+article{
+  min-height:70vh;
+}
+ul.menu li.item_name p:first-child{
+  font-size:100%;
+  width:100%;
+}
+ul.menu li.item_name p:last-child{
+  font-size:100%;
+}

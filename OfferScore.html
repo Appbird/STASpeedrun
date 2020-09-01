@@ -1,0 +1,113 @@
+<?php
+ini_set( 'display_errors', 1 );
+ini_set( 'error_reporting', E_ALL );
+?>
+  <!DOCTYPE html>
+  <html>
+
+  <head>
+
+
+
+    <meta charset="utf-8">
+    <title>STASpeedrun|記録申請</title>
+    <link rel="stylesheet" href="css/Constitution_pc.css">
+    <link rel="stylesheet" href="css/Standard.css">
+    <link rel="stylesheet" href="css/RecordDisplaytable.css">
+    <link rel="stylesheet" href="css/recordDetail.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet">
+    <script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+
+    <script type="text/javascript" src="js/expand.js"></script>
+    <script type="text/javascript" src="js/ajax.js"></script>
+    <script type="text/javascript" src="js/OfferScore.js"></script>
+
+    <script type="text/javascript">
+
+      var p_error;
+      var sentvalue = {};
+
+      //Get json files from host
+      async function onload() {
+        AbbilitesList = await SendRequest("Lists/AbilitiesList.json");
+        DifficultList = await SendRequest("Lists/DifficultyList.json");
+        EnemyNameList = await SendRequest("Lists/EnemyNameList.json");
+        p_error = document.getElementsByClassName('error_display');
+        return;
+      }
+    </script>
+
+  </head>
+
+  <body onload="onload().then(function(){Init()});">
+    <header>
+      <ul id="HeaderMenu">
+        <li><a href="TheUltimateChoice.html"><img src="UIImages\Timer.png"><br>記録一覧</a></li>
+        <li><a href="Runner.html"><img src="UIImages\People.png"><br>走者一覧</a></li>
+        <li><a href="OfferScore.html"><img src="UIImages\Offer.png"><br>記録申請</a></li>
+      </ul>
+    </header>
+
+
+    <section id="main">
+
+      <article id="pagebody">
+
+          <ul  class="menu" >
+            <li class="item_title">
+              <p>記録申請</p>
+              <p></p>></li>
+            <li class="item_name">記録となる動画が存在するTweet/YoutubeのURL</li>
+            <li class="item_input" id="Enter_MediaURL">
+              <input type="url" size="30" maxlength="150" class="MediaLink" placeholder="URL" required onchange="check_IsCollectURL(this);">
+              <input type="url" size="30" maxlength="150" class="MediaLink" onchange="check_IsCollectURL(this);">
+              <input type="url" size="30" maxlength="150" class="MediaLink" onchange="check_IsCollectURL(this);">
+              <input type="url" size="30" maxlength="150" class="MediaLink" onchange="check_IsCollectURL(this);">
+              <input type="url" size="30" maxlength="150" class="MediaLink" onchange="check_IsCollectURL(this);">
+            </li>
+            <li class="item_input"><p class="error_display"></p></li>
+            <div id="YoutubeURLOnly" display="none">
+              <li class="item_name">その走者のTwitterアカウントID(@は必要ではない)</li>
+              <li class="item_input" id="Enter_Runner">
+                <input type="url" size="50" maxlength="150" class="TwitterID" placeholder="URL" required onchange="fix_Name(this);">
+              </li>
+              <li class="item_input"><p class="error_display"></p></li>
+            </div>
+            <li class="item_name">ボス</li>
+            <li class="item_input" id="Enter_Ability">
+              <select size="1" id="BossName">  </select>
+            </li>
+            <li class="item_name">1Pのコピー能力</li>
+            <li class="item_input" id="Enter_Ability">
+                <select size="1" id="Abbility_FirstPlayer"></select>
+            </li>
+
+            <li class="item_name">フレンズのコピー能力</li>
+            <li class="item_input" id="Enter_Friends">
+              <select size="1" class="Abbility_AnotherPlayer" onchange="check_entered(this);">  </select>
+              <select size="1" class="Abbility_AnotherPlayer" onchange="check_entered(this);">  </select>
+              <select size="1" class="Abbility_AnotherPlayer">  </select>
+            </li>
+            <li class="item_name">記録</li>
+            <li class="item_input" id="Enter_Timer">
+              <input type="tel" size="30" maxlength="1" class="Record" id="min" onchange="check_IsNumber(this);">:
+              <input type="tel" size="30" maxlength="3" class="Record" id="sec" onchange="check_IsNumber(this);">.
+              <input type="tel" size="30" maxlength="2" class="Record" id="ms"  onchange="check_IsNumber(this);">
+            </li>
+            <li class="item_input"><p class="error_display"></p></li>
+          <li class="item_click" onclick="CreateOffer();" id="sendOfferbutton">
+          申請する
+          </li>
+          <li class="item_blank">
+          </li>
+          <li class="item_click">
+              <a href="main.html">タイトルに戻る</a>
+          </li>
+        </ul>
+          <div id="Result_Display"><id>
+      </article>
+    </section>
+
+    <html>

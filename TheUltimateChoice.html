@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>STASpeedrun|記録一覧</title>
+
+  <link rel="stylesheet" href="css/Constitution_pc.css">
+  <link rel="stylesheet" href="css/Standard.css">
+  <link rel="stylesheet" href="css/RecordDisplaytable.css">
+  <link rel="stylesheet" href="css/recordDetail.css">
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet">
+
+  <script type="text/javascript" src="js/expand.js"></script>
+  <script type="text/javascript" src="js/ajax.js"></script>
+  <script type="text/javascript" src="js/cookie.js"></script>
+  <script type="text/javascript" src="js/DisplaySelDifficult.js"></script>
+  <script type="text/javascript" src="js/DisplayRecords.js"></script>
+  <script type="text/javascript" src="js/tableBuilder.js"></script>
+  <script type="text/javascript" src="js/DisplayDetail.js"></script>
+  <script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+  <script src = "https://www.youtube.com/player_api"> </script>
+  <script type="text/javascript">
+    var AbilitiesList, DifficultList, EnemyNameList, FriAbList, Favabilities = null;
+    var difficulty_namelist = ["1", "2", "3", "4", "5", "6", "7", "S"];
+    var history_obj = {};
+    var difficult = "S";
+    async function onload() {
+      AbilitiesList = await SendRequest("Lists/AbilitiesList.json");
+      DifficultList = await SendRequest("Lists/DifficultyList.json");
+      EnemyNameList = await SendRequest("Lists/EnemyNameList.json");
+      FriAbList = await SendRequest("Lists/FriendsAbilitiesColor.json");
+      Favabilities = GetFavoriteAbilities();
+      return;
+    }
+  </script>
+
+</head>
+
+<body onload="onload().then(function(){RefreshDisplay();ChangeMode_DisplayRecord(true); });init_Setting_difficult();">
+
+  <header>
+    <ul id="SettingMenu">
+      <li class="dif"><a href="#difficulty_sel"><img src="UIImages\difficulty.png"><br>難易度チョイス</a></li>
+      <li class="fri"><a href="#friends_sel"><img src="UIImages\Regulation.png"><br>フレンズチョイス</a></li>
+    </ul>
+    <ul id="HeaderMenu">
+      <li><a href="TheUltimateChoice.html"><img src="UIImages\Timer.png"><br>記録一覧</a></li>
+      <li><a href="Runner.html"><img src="UIImages\People.png"><br>走者一覧</a></li>
+      <li><a href="OfferScore.html"><img src="UIImages\Offer.png"><br>記録申請</a></li>
+    </ul>
+  </header>
+
+
+  <!--隠れてるメニュー-->
+  <section class="HiddenMenu" id="difficulty_sel">
+    <a href="#!" onclick="ChangeEnebleSetting('normal');reflectSetting()"></a>
+    <ul class="menu">
+      <li class="item_title">
+        <p>難易度チョイス</p>
+        <p class="nowSelecting"></p>
+      </li>
+      <li class="item_input" id="li_selectdif"><input id="selectDifficult" type="range" value=7 min=0 max=7></li>
+    </ul>
+  </section>
+
+  <section class="HiddenMenu" id="friends_sel">
+    <a href="#display_detail"></a>
+    <ul class="menu">
+      <li class="item_title">
+        <p>フレンズチョイス</p>
+        <p class="nowSelecting"></p>
+      </li>
+    </ul>
+    <ul class="menu" id="anotherFriends">
+    </ul>
+  </section>
+
+  <section class="HiddenMenu" id="display_detail">
+    <a href="#!" onclick="ChangeEnebleSetting('normal');"></a>
+    <div class="PopupWindow">
+      <ul class="menu">
+        <li class="item_title">記録詳細</li>
+        <li class="item_title" id="Record_detail">
+          <p></p>
+          <p></p>
+        </li>
+        <li class="item_title" id="Regulation">
+          <p></p>
+          <p></p>
+        </li>
+        <li class="item_display" id="media_detail"> </li>
+        <li class="item_display" ><table id="displayhistory"></table></li>
+      </ul>
+    </div>
+  </section>
+
+  <!--メインページ-->
+  <section id="main">
+
+    <article id="pagebody">
+      <ul class="menu">
+        <li class="item_title">フレンズ:ひとりで</li>
+      </ul>
+      <br>
+
+      <div id="Loading_icon" class="valid">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
+
+      <div id="DisplayInformation">
+        <table id="DisplayRecord"></table>
+      </div>
+<ul class="menu">
+
+    <li class="item_blank"></li>
+    <li class="item_click">
+        <a href="main.html">タイトルに戻る</a>
+    </li>
+    </ul>
+
+      <br>
+    </article>
+  </section>
+
+</body>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="/__/firebase/7.19.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<!-- Initialize Firebase -->
+<script src="/__/firebase/init.js"></script>
+</html>

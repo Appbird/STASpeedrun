@@ -1,0 +1,50 @@
+@charset "UTF-8";
+@keyframes Downin
+{
+    0%
+    {
+        transform: scaleY(0);
+        opacity: 0;
+    }
+    100%
+    {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+section#DetailDisplayer{
+  display:none;
+}
+/*記録詳細*/
+section#DetailDisplayer ul li p:first-child
+{
+  font-size:250%;
+  font-weight: bold;
+}
+section#DetailDisplayer ul li p:last-child
+{
+  font-size:150%;
+  font-weight: 400;
+}
+section#DetailDisplayer ul li#Regulation
+{
+  align-items: flex-start;
+}
+section#DetailDisplayer ul li#Regulation p{
+  font-size:100%;
+  font-weight: bold;
+}
+section#DetailDisplayer ul li#media_detail
+{
+  display:flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow-y: scroll;
+}
+
+section#DetailDisplayer ul li table
+{
+  display:inline-block;
+  width:100%;
+  white-space: normal;
+}

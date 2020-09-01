@@ -1,0 +1,226 @@
+@charset "UTF-8";
+/*ページの基礎構成*/
+
+body
+{
+    background-image: url('../UIImages/BackGround.png');
+    background-repeat: repeat;
+    background-size: 300px;
+}
+
+section#main
+{
+    display: -webkit-flex;
+    display:         flex;
+
+    justify-content: center;
+}
+
+/*本文*/
+
+article
+{
+
+    padding-bottom: 10%;
+    border-bottom: solid 3px rgb(170, 170, 170);
+    background-color: #fff;
+    /*内容全体の背景色*/
+    background-image: url('../UIImages/side.png');
+    background-repeat: repeat-y;
+    background-size: 100% auto;
+    margin: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+::-webkit-scrollbar
+{
+    width: 12px;
+}
+
+::-webkit-scrollbar-track
+{
+    top:0;
+    border: none;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: inset 0 0 2px #777;
+}
+
+::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    background: #aaa;
+    box-shadow: none;
+}
+
+@media screen and (min-width:480px) and ( max-width:1024px)
+{
+    article
+    {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width:1024px)
+{
+    article
+    {
+        width: 70%;
+    }
+}
+
+/*ヘッダー*/
+
+header
+{
+    position: sticky;
+    z-index: 9;
+    top: 0;
+
+    display: -webkit-flex;
+    display:         flex;
+
+    width: 100%;
+    height: 30%;
+
+    transition: all 300ms 0s ease;
+
+    border-bottom: solid 3px rgb(170, 170, 170);
+    background-color: #fff;
+    /*内容全体の背景色*/
+    box-shadow: 0 0 15px 15px rgba(0, 0, 0, .2);
+
+    justify-content: flex-end;
+}
+
+ul#SettingMenu,
+ul#HeaderMenu
+{
+    position: relative;
+    width:50%;
+    display: -webkit-flex;
+    display:         flex;
+    padding:0.8%;
+    list-style-type: none;
+
+    align-items: center;
+}
+ul#HeaderMenu
+{
+    justify-content: flex-end;
+}
+
+ul#SettingMenu
+{
+    justify-content: flex-start;
+}
+
+ul#SettingMenu li,
+ul#HeaderMenu li
+{
+    width: 20%;
+    -webkit-transition: all .3s ease;
+
+    　-moz-transition: all .3s ease;
+    　-ms-transition: all .3s ease;
+    　-o-transition: all .3s ease;
+    　transition: all .3s ease;
+}
+@media screen and (min-width:480px) and ( max-width:1024px)
+{
+  ul#SettingMenu li,
+  ul#HeaderMenu li
+  {
+      width: 33%;
+  }
+}
+
+@media screen and (min-width:1024px)
+{
+  ul#SettingMenu li,
+  ul#HeaderMenu li
+  {
+      width: 20%;
+  }
+}
+ul#SettingMenu li img,
+ul#HeaderMenu li img
+{
+    display: inline-block;
+
+    width: 80px;
+}
+
+ul#SettingMenu li a,
+ul#HeaderMenu li a
+{
+    font-size: 120%;
+
+    position: relative;
+
+    display: inline-block;
+
+    width: 100%;
+    height: 8%;
+    margin: 0 auto;
+
+    text-align: center;
+    text-decoration: none;
+
+    color: #999;
+    border-right: solid 1px #aaa;
+    border-left: solid 1px #aaa;
+}
+
+ul#SettingMenu li:Hover,
+ul#HeaderMenu li:Hover
+{
+    background-color: #eee;
+}
+
+/*モーダルウィンドウ*/
+section.HiddenMenu
+{
+    position: fixed;
+    z-index: 10;
+
+    width: 100%;height: 120%;
+
+    -webkit-transition: opacity .3s ease;
+    pointer-events: none;
+
+    opacity: 0;
+    background-color: rgba(0,0,0,.4);
+
+    　-moz-transition: opacity .3s ease;
+    　-ms-transition: opacity .3s ease;
+    　-o-transition: opacity .3s ease;
+    　transition: opacity .3s ease;
+
+}
+
+section.HiddenMenu:not(:target)
+{
+    display: none\9;
+
+    pointer-events: none;
+
+    opacity: 0;
+}
+section.HiddenMenu:target
+{
+    display: block\9;
+
+    pointer-events: auto;
+
+    opacity: 1;
+}
+section.HiddenMenu>a
+{
+    position: absolute;
+    width: 100%; height: 100%;
+}
+section.HiddenMenu ul
+{
+    position: relative;
+}
